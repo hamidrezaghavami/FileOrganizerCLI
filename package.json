@@ -1,0 +1,23 @@
+{
+  "name": "fileorganizercli",
+  "version": "1.0.0",
+  "description": "A simple file organizer cli app",
+  "keywords": [
+    "nodejs"
+  ],
+  "homepage": "https://github.com/hamidrezaghavami/FileOrganizerCLI#readme",
+  "bugs": {
+    "url": "https://github.com/hamidrezaghavami/FileOrganizerCLI/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hamidrezaghavami/FileOrganizerCLI.git"
+  },
+  "license": "MIT",
+  "author": "Hamid Reza Ghavami",
+  "type": "commonjs",
+  "main": "FileOrganizerCLI.js",
+  "scripts": {
+    "test": "test"
+  }
+}
