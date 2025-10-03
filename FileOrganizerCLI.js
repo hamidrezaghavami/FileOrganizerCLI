@@ -1,12 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 
-function getDirectoryPath () { 
+function getDirectoryPath () { // simplified
     const args = process.argv.slice(2);
-    if ( args.length === 0 ) { 
-        console.log("Please provide a directory path.");
-        process.exit(1);
-    }
+    if ( args.length === 0 ) console.log("Please provide a directory path.") || process.exit(1);
     return args[0];
 }
 
@@ -40,7 +37,7 @@ function organizeFiles (dirPath) {
         const ext = path.extname(file);
         if (!ext) continue;
 
-        const categoryFolder = path.join(dirPath, category(ext));
+        const categoryFolder = path.join(dirPath, getCategory(ext));
         createFolderIfNotExists(categoryFolder);
 
         moveFile(
