@@ -1,8 +1,3 @@
-/*
-** @Author: HamidReza Ghavami
-** @Date: 2025-09-18
-** @Description: A simple CLI tool to organize files into folders based on their extensions.
-*/
 import fs from 'fs';
 import path from 'path';
 
@@ -25,17 +20,13 @@ function getCategory (ext) {
         music: ['.mp3', '.wav']
     };
     for ( const category in CategoryMap ) { 
-        if ( CategoryMap[category].includes(ext.toLowerCase())) { 
-            return category;
-        }
+        if ( CategoryMap[category].includes(ext.toLowerCase())) return category;
     }
     return 'others';
 }
 
-function createFolderIfNotExists (folderpath) { 
-    if (!fs.existsSync(folderpath)) { 
-        fs.mkdirSync(folderpath);
-    }
+function createFolderIfNotExists (folderpath) { // refactor 5 into 3 lines
+    if (!fs.existsSync(folderpath)) return fs.mkdirSync(folderpath);
 }
 
 function moveFile (filePath, targetPath) { 
@@ -45,19 +36,17 @@ function moveFile (filePath, targetPath) {
 function organizeFiles (dirPath) { 
     const files = fs.readdirSync(dirPath);
 
-    for ( const file of files ) { 
+    for ( const file of files ) { // refactor 18 lines into 16
         const ext = path.extname(file);
         if (!ext) continue;
 
-        const category = getCategory(ext);
-        const categoryFolder = path.join(dirPath, category);
-
+        const categoryFolder = path.join(dirPath, category(ext));
         createFolderIfNotExists(categoryFolder);
 
-        const oldPath = path.join(dirPath, file);
-        const newPath = path.join(categoryFolder, file);
-
-        moveFile(oldPath, newPath);
+        moveFile(
+            path.join(dirPath, file),
+            path.join(categoryFolder, file)
+        );
     }
     console.log("Files organized successfully!");
 }
